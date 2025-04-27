@@ -13,6 +13,7 @@ namespace Vitavy.Infrastructure.EventBus;
 
 public class EventBusConsumer(IOptions<RabbitMqSetting> rabbitMqSetting, ILogger<EventBusConsumer> logger) : IEventBusConsumer
 {
+    
     public async Task Subscribe<TMessage, TResponse>(Func<TMessage, CancellationToken, Task<Result<TResponse>>> processMessageAsync, string consumerId, CancellationToken stoppingToken)
     {
         logger.LogInformation($"Subscribing to RabbitMQ consumer: {consumerId}");
@@ -30,8 +31,8 @@ public class EventBusConsumer(IOptions<RabbitMqSetting> rabbitMqSetting, ILogger
         
         var consumerCredential = rabbitMqSetting.Value.GetConsumerCredential(consumerId);
 
-        await using var connection = await factory.CreateConnectionAsync(stoppingToken);
-        await using var channel = await connection.CreateChannelAsync(cancellationToken: stoppingToken);
+        var connection = await factory.CreateConnectionAsync(stoppingToken);
+        var channel = await connection.CreateChannelAsync(cancellationToken: stoppingToken);
 
         await channel.ExchangeDeclareAsync(exchange: consumerCredential.ExchangeName, type: consumerCredential.Type.ToString().ToLowerInvariant(), cancellationToken: stoppingToken);
 
@@ -90,10 +91,6 @@ public class EventBusConsumer(IOptions<RabbitMqSetting> rabbitMqSetting, ILogger
                 var response = processedSuccessfully!.ValueOrDefault;
                 var serializedResponse = JsonSerializer.Serialize(response);
                 var responseBytes = Encoding.UTF8.GetBytes(serializedResponse);
-                _ = await originalConsumer.Channel.QueueDeclareAsync(
-                    queue: props.ReplyTo!,
-                    durable: true,
-                    cancellationToken: stoppingToken);
                 await originalConsumer.Channel.BasicPublishAsync(exchange: string.Empty, routingKey: props.ReplyTo!,
                     mandatory: true, basicProperties: replyProps, body: responseBytes, cancellationToken: stoppingToken);
             }
