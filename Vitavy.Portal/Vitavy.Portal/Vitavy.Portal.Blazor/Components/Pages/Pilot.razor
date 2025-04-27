@@ -1,0 +1,33 @@
+@page "/modules/pilot"
+@implements IDisposable
+@using Vitavy.Portal.Blazor.Models
+<MudText Typo="Typo.h3">Module Pilote</MudText>
+
+<MudPaper Class="pa-16 ma-2">
+    <MudForm Model="@_model" @ref="@form">
+        <MudGrid>
+            <MudItem xs="2">
+                <MudTextField @bind-Value="_model.Name" Label="Nom" HelperText="Donne un nom à ton action" Variant="Variant.Text"/>
+            </MudItem>
+            <MudItem xs="4">
+                <MudAutocomplete @bind-Value="_model.City"
+                                 SearchFunc="Search"
+                                 Variant="Variant.Text"
+                                 Label="Ville"
+                                 HelperText="Choisis une ville"
+                                 Clearable="true" />
+            </MudItem>
+            <MudFlexBreak/>
+            <MudItem xs="2">
+                <MudDatePicker Label="Jour choisi" @bind-Date="_model.Date"/>
+            </MudItem>
+            <MudItem xs="4">
+                <MudTimePicker Label="Heure" @bind-Time="_model.Time" />
+            </MudItem>
+            <MudFlexBreak/>
+            <MudItem>
+                <MudButton Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto" OnClick="@(async () => await Submit(cts.Token))">Go</MudButton>
+            </MudItem>
+        </MudGrid>
+    </MudForm>
+</MudPaper>

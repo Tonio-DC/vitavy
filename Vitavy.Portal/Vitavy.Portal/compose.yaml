@@ -1,0 +1,12 @@
+﻿services:
+  vitavy.portal:
+    image: vitavy.portal
+    build:
+      context: .
+      dockerfile: Vitavy.Portal/Vitavy.Portal/Dockerfile
+
+  vitavy.portal.client:
+    image: vitavy.portal.client
+    build:
+      context: .
+      dockerfile: Vitavy.Portal/Vitavy.Portal.Client/Dockerfile
