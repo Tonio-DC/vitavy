@@ -4,8 +4,7 @@ using System.Text.Json;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using RabbitMQ.Client;
-using RabbitMQ.Client.Events;
-using Vitavy.Infrastructure.Contracts;
+using Vitavy.Infrastructure.Abtraction.Contracts;
 using Vitavy.Infrastructure.Exceptions;
 using Vitavy.Infrastructure.Models;
 

@@ -1,6 +1,6 @@
 using FluentResults;
 
-namespace Vitavy.Infrastructure.Contracts;
+namespace Vitavy.Infrastructure.Abtraction.Contracts;
 
 public interface IEventBusConsumer
 {

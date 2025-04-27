@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vitavy.Infrastructure", "Vi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vitavy.Portal.Infrastructure", "Vitavy.Portal.Infrastructure\Vitavy.Portal.Infrastructure.csproj", "{73064527-BF3B-45AF-8779-D803A5C92784}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vitavy.Infrastructure.Abtraction", "Vitavy.Infrastructure.Abtraction\Vitavy.Infrastructure.Abtraction.csproj", "{AE57F6FF-3A46-4C2B-BA33-291FBEFECBBD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,5 +37,9 @@ Global
 		{73064527-BF3B-45AF-8779-D803A5C92784}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{73064527-BF3B-45AF-8779-D803A5C92784}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{73064527-BF3B-45AF-8779-D803A5C92784}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AE57F6FF-3A46-4C2B-BA33-291FBEFECBBD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE57F6FF-3A46-4C2B-BA33-291FBEFECBBD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE57F6FF-3A46-4C2B-BA33-291FBEFECBBD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE57F6FF-3A46-4C2B-BA33-291FBEFECBBD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

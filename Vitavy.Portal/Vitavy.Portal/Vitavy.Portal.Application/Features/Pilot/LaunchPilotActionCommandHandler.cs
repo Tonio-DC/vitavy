@@ -1,7 +1,7 @@
 using System.Globalization;
 using FluentResults;
 using MediatR;
-using Vitavy.Infrastructure.Contracts;
+using Vitavy.Infrastructure.Abtraction.Contracts;
 using Vitavy.Portal.Application.Models;
 using Vitavy.Portal.Application.Validators;
 

@@ -1,5 +1,5 @@
 using Microsoft.Extensions.DependencyInjection;
-using Vitavy.Infrastructure.Contracts;
+using Vitavy.Infrastructure.Abtraction.Contracts;
 using Vitavy.Infrastructure.EventBus;
 
 namespace Vitavy.Infrastructure.Extensions;

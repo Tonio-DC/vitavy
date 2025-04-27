@@ -8,12 +8,6 @@
 
     <ItemGroup>
       <PackageReference Include="FluentResults" Version="3.16.0" />
-      <PackageReference Include="Microsoft.Extensions.Options" Version="8.0.2" />
-      <PackageReference Include="RabbitMQ.Client" Version="7.1.2" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <ProjectReference Include="..\Vitavy.Infrastructure.Abtraction\Vitavy.Infrastructure.Abtraction.csproj" />
     </ItemGroup>
 
 </Project>
