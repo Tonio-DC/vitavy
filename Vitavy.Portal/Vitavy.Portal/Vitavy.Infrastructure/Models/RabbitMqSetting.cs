@@ -5,12 +5,12 @@ namespace Vitavy.Infrastructure.Models;
 public class RabbitMqSetting
 {
     public RabbitMqCredential? ServerCredentials { get; set; }
-    public required IEnumerable<EventBusProducerCredential> EventBusProducersCredentials { get; set; }
+    public required EventBusProducerGlobalCredential EventBusProducersCredentials { get; set; }
     public required IEnumerable<EventBusConsumerCredential> EventBusConsumersCredentials { get; set; }
 
     public EventBusProducerCredential GetProducerCredential(string producerId)
     {
-        var producerCredential = EventBusProducersCredentials.FirstOrDefault(c => c.Id == producerId) ?? throw new RabbitMqMissingCredentialException(producerId);
+        var producerCredential = EventBusProducersCredentials.Producers.FirstOrDefault(c => c.Id == producerId) ?? throw new RabbitMqMissingCredentialException(producerId);
         return producerCredential;
     }
 
@@ -19,6 +19,17 @@ public class RabbitMqSetting
         var consumerCredential = EventBusConsumersCredentials.FirstOrDefault(c => c.Id == consumerId) ?? throw new RabbitMqMissingCredentialException(consumerId);
         return consumerCredential;
     }
+}
+
+public class EventBusProducerGlobalCredential
+{
+    public required IEnumerable<EventBusProducerCredential> Producers { get; set; }
+    public RpcCredential Rpc { get; set; }
+}
+
+public class RpcCredential
+{
+    public string? RpcQueueName { get; set; }
 }
 
 public class EventBusProducerCredential
