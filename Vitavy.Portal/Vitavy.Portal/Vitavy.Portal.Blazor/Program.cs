@@ -5,7 +5,6 @@ using Vitavy.Portal.Application.Extensions;
 using Vitavy.Portal.Application.Features.Pilot;
 using Vitavy.Portal.Blazor.Components;
 using Vitavy.Portal.Blazor.Mapping;
-using Vitavy.Portal.Infrastructure.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,8 +18,7 @@ builder.Services.AddRazorComponents()
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly(), typeof(LaunchPilotActionCommandHandler).Assembly));
 builder.Services.AddAutoMapper(typeof(MappingProfile));
 builder.Services.AddApplicationServices();
-builder.Services.AddInfrastructure(builder.Configuration);
-builder.Services.AddEventHubInfrastructureServices();
+builder.Services.AddEventHubInfrastructureServices(builder.Configuration);
 
 var app = builder.Build();
 

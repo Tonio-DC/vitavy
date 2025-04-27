@@ -4,5 +4,5 @@ namespace Vitavy.Infrastructure.Abtraction.Contracts;
 
 public interface IEventBusConsumer
 {
-    Task Subscribe<T>(Func<T, CancellationToken, Task<Result>> processMessageAsync, string consumerId, CancellationToken stoppingToken);
+    Task Subscribe<TMessage, TResponse>(Func<TMessage, CancellationToken, Task<Result<TResponse>>> processMessageAsync, string consumerId, CancellationToken stoppingToken);
 }

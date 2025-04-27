@@ -13,7 +13,7 @@ namespace Vitavy.Infrastructure.EventBus;
 
 public class EventBusConsumer(IOptions<RabbitMqSetting> rabbitMqSetting, ILogger<EventBusConsumer> logger) : IEventBusConsumer
 {
-    public async Task Subscribe<T>(Func<T, CancellationToken, Task<Result>> processMessageAsync, string consumerId, CancellationToken stoppingToken)
+    public async Task Subscribe<TMessage, TResponse>(Func<TMessage, CancellationToken, Task<Result<TResponse>>> processMessageAsync, string consumerId, CancellationToken stoppingToken)
     {
         logger.LogInformation($"Subscribing to RabbitMQ consumer: {consumerId}");
         var factory = new ConnectionFactory
@@ -48,17 +48,17 @@ public class EventBusConsumer(IOptions<RabbitMqSetting> rabbitMqSetting, ILogger
         await StartConsuming(channel, queueName, processMessageAsync, stoppingToken);
     }
 
-    private async Task StartConsuming<T>(IChannel channel, string queueName,
-        Func<T, CancellationToken, Task<Result>> processMessageAsync, CancellationToken stoppingToken)
+    private async Task StartConsuming<TMessage, TResponse>(IChannel channel, string queueName,
+        Func<TMessage, CancellationToken, Task<Result<TResponse>>> processMessageAsync, CancellationToken stoppingToken)
     {
         var consumer = new AsyncEventingBasicConsumer(channel);
-        consumer.ReceivedAsync += async (_, ea) =>
+        consumer.ReceivedAsync += async (sender, ea) =>
         {
             var body = ea.Body.ToArray();
             var parsedPayload = Encoding.UTF8.GetString(body);
-            var payload = JsonSerializer.Deserialize<T>(parsedPayload);
+            var payload = JsonSerializer.Deserialize<TMessage>(parsedPayload);
 
-            Result? processedSuccessfully = null;
+            Result<TResponse>? processedSuccessfully = null;
 
             if (payload is not null)
             {
@@ -77,6 +77,28 @@ public class EventBusConsumer(IOptions<RabbitMqSetting> rabbitMqSetting, ILogger
                 logger.LogError($"Error occurred while deserializing message from queue {queueName}");
             }
 
+            #region RPC
+            
+            var props = ea.BasicProperties;
+            var originalConsumer = (AsyncEventingBasicConsumer)sender;
+            if (!string.IsNullOrEmpty(props.CorrelationId))
+            {
+                var replyProps = new BasicProperties
+                {
+                    CorrelationId = props.CorrelationId
+                };
+                var response = processedSuccessfully!.ValueOrDefault;
+                var serializedResponse = JsonSerializer.Serialize(response);
+                var responseBytes = Encoding.UTF8.GetBytes(serializedResponse);
+                _ = await originalConsumer.Channel.QueueDeclareAsync(
+                    queue: props.ReplyTo!,
+                    durable: true,
+                    cancellationToken: stoppingToken);
+                await originalConsumer.Channel.BasicPublishAsync(exchange: string.Empty, routingKey: props.ReplyTo!,
+                    mandatory: true, basicProperties: replyProps, body: responseBytes, cancellationToken: stoppingToken);
+            }
+            
+            #endregion
 
             if (processedSuccessfully is { IsSuccess: true })
             {
