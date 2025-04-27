@@ -17,7 +17,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Vitavy.Infrastructure\Vitavy.Infrastructure.csproj" />
+      <ProjectReference Include="..\Vitavy.Infrastructure.Abtraction\Vitavy.Infrastructure.Abtraction.csproj" />
     </ItemGroup>
 
 </Project>
