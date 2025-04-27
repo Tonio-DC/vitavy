@@ -6,7 +6,7 @@ namespace Vitavy.Infrastructure.Extensions;
 
 public static class DependenciesRegistration
 {
-    public static IServiceCollection AddEventHubInfrastructure(this IServiceCollection services)
+    public static IServiceCollection AddEventHubInfrastructureServices(this IServiceCollection services)
     {
         services.AddTransient<IEventBusConsumer, EventBusConsumer>();
         services.AddTransient(typeof(IEventBusProducer<>), typeof(EventBusProducer<>));

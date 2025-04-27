@@ -2,7 +2,7 @@ using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
-using Vitavy.Portal.Application.Requests.Commands;
+using Vitavy.Portal.Application.Features.Pilot;
 using Vitavy.Portal.Blazor.Models;
 
 namespace Vitavy.Portal.Blazor.Components.Pages;

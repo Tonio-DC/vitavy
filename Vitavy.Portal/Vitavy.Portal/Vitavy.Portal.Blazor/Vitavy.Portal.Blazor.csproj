@@ -17,5 +17,6 @@
 
     <ItemGroup>
       <ProjectReference Include="..\Vitavy.Portal.Application\Vitavy.Portal.Application.csproj" />
+      <ProjectReference Include="..\Vitavy.Portal.Infrastructure\Vitavy.Portal.Infrastructure.csproj" />
     </ItemGroup>
 </Project>

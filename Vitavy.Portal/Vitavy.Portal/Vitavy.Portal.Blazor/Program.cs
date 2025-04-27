@@ -1,6 +1,9 @@
 using System.Reflection;
 using MudBlazor.Services;
+using Vitavy.Infrastructure.Extensions;
+using Vitavy.Portal.Application.Extensions;
 using Vitavy.Portal.Blazor.Components;
+using Vitavy.Portal.Infrastructure.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +15,10 @@ builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
+
+builder.Services.AddApplicationServices();
+builder.Services.AddInfrastructure(builder.Configuration);
+builder.Services.AddEventHubInfrastructureServices();
 
 var app = builder.Build();
 
