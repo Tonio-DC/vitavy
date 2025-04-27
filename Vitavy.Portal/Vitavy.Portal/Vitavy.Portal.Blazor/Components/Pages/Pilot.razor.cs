@@ -27,7 +27,7 @@ public partial class Pilot(ISnackbar snackbar, IMediator mediator, IMapper mappe
         "Prague", "Budapest", "Athènes", "Tallinn", "Vilnius"
     ];
     
-    private async Task<IEnumerable<string>> Search(string value, CancellationToken token)
+    private async Task<IEnumerable<string?>> Search(string? value, CancellationToken token)
     {
         // on simule une recherche de villes depuis une API publique.
         await Task.Delay(5, token);
