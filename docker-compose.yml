@@ -9,3 +9,21 @@ services:
       interval: 20s
       timeout: 10s
       retries: 4
+  vitavy.portal.blazor:
+    image: vitavy.portal.blazor
+    build:
+      context: ./Vitavy.Portal/Vitavy.Portal
+      dockerfile: Vitavy.Portal.Blazor/Dockerfile
+    ports:
+      - "8080:8080"
+      - "8081:8081"
+      - "5672:5672"
+  vitavy.pilot.worker:
+    image: vitavy.pilot.worker
+    build:
+      context: ./Vitavy.Pilot/Vitavy.Pilot
+      dockerfile: Vitavy.Pilot.Worker/Dockerfile
+    ports:
+      - "8080:8080"
+      - "8081:8081"
+      - "5672:5672"

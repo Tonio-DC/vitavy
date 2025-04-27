@@ -3,11 +3,15 @@ USER $APP_UID
 WORKDIR /app
 EXPOSE 8080
 EXPOSE 8081
+EXPOSE 5672
 
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["Vitavy.Pilot.Worker/Vitavy.Pilot.Worker.csproj", "Vitavy.Pilot.Worker/"]
+COPY ["../../Vitavy.Portal/Vitavy.Portal/Vitavy.Infrastructure.Abtraction/Vitavy.Infrastructure.Abtraction.csproj", "../../Vitavy.Portal/Vitavy.Portal/Vitavy.Infrastructure.Abtraction/"]
+COPY ["../../Vitavy.Portal/Vitavy.Portal/Vitavy.Infrastructure/Vitavy.Infrastructure.csproj", "../../Vitavy.Portal/Vitavy.Portal/Vitavy.Infrastructure/"]
+COPY ["Vitavy.Pilot.Application/Vitavy.Pilot.Application.csproj", "Vitavy.Pilot.Application/"]
 RUN dotnet restore "Vitavy.Pilot.Worker/Vitavy.Pilot.Worker.csproj"
 COPY . .
 WORKDIR "/src/Vitavy.Pilot.Worker"

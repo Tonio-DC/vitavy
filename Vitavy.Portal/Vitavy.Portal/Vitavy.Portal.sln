@@ -4,7 +4,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vitavy.Portal.Application",
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{ECC7CFB1-5A33-4AB6-9B70-A43ABF4A795B}"
 	ProjectSection(SolutionItems) = preProject
-		compose.yaml = compose.yaml
 		..\..\docker-compose.yml = ..\..\docker-compose.yml
 	EndProjectSection
 EndProject
