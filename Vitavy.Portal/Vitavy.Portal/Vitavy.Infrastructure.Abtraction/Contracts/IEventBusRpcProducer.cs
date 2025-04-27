@@ -1,4 +1,4 @@
-namespace Vitavy.Infrastructure.Contracts;
+namespace Vitavy.Infrastructure.Abtraction.Contracts;
 
 public interface IEventBusRpcProducer<in TMessage, TResponse>
     where TMessage : class

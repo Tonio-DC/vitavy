@@ -24,7 +24,7 @@ public class RabbitMqSetting
 public class EventBusProducerGlobalCredential
 {
     public required IEnumerable<EventBusProducerCredential> Producers { get; set; }
-    public RpcCredential Rpc { get; set; }
+    public required RpcCredential Rpc { get; set; }
 }
 
 public class RpcCredential
@@ -34,19 +34,19 @@ public class RpcCredential
 
 public class EventBusProducerCredential
 {
-    public string Id { get; set; }
-    public string ExchangeName { get; set; }
-    public ExchangeType Type { get; set; }
+    public required string Id { get; set; }
+    public required string ExchangeName { get; set; }
+    public required ExchangeType Type { get; set; }
 }
 
 //TODO make these classes records and add validation rules (ie exceptions?) regarding exchange types
 public class EventBusConsumerCredential
 {
-    public string Id { get; set; }
-    public string ExchangeName { get; set; }
-    public ExchangeType Type { get; set; }
-    public string QueueName { get; set; }
-    public IEnumerable<string> BindingKeys { get; set; }
+    public required string Id { get; set; }
+    public required string ExchangeName { get; set; }
+    public required ExchangeType Type { get; set; }
+    public required string QueueName { get; set; }
+    public required IEnumerable<string> BindingKeys { get; set; }
 }
 
 public enum ExchangeType

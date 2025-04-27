@@ -1,7 +1,8 @@
 using System.Globalization;
 using FluentResults;
 using MediatR;
-using Vitavy.Infrastructure.Contracts;
+using Vitavy.Infrastructure.Abtraction.Contracts;
+using Vitavy.Portal.Application.Constants;
 using Vitavy.Portal.Application.Models;
 using Vitavy.Portal.Application.Validators;
 
@@ -17,8 +18,9 @@ public class LaunchPilotActionCommandHandler(IPilotCommandValidator pilotCommand
             return Result.Fail<string>(commandResult.Errors);
         }
 
-        var pilotResponse = await eventBusRpcProducer.PublishRpc(command, Constants.RoutingConstants.RoutingKey.Pilot,
-            Constants.RoutingConstants.ProducerId, cancellationToken);
+        await eventBusRpcProducer.StartRpc(RoutingConstants.ProducerId, cancellationToken);
+        var pilotResponse = await eventBusRpcProducer.PublishRpc(command, RoutingConstants.RoutingKey.Pilot,
+            RoutingConstants.ProducerId, cancellationToken);
         
         return Result.Ok(pilotResponse.Temperature.ToString(CultureInfo.InvariantCulture));
     }
