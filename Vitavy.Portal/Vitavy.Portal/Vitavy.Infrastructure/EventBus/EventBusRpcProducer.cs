@@ -95,6 +95,8 @@ public class EventBusRpcProducer<TMessage, TResponse> : IEventBusRpcProducer<TMe
         _callbackMapper.TryAdd(correlationId, tcs);
         
         var producerCredential = _rabbitMqSetting.Value.GetProducerCredential(producerId);
+        await _channel.ExchangeDeclareAsync(exchange: producerCredential.ExchangeName, type: producerCredential.Type.ToString().ToLowerInvariant(), cancellationToken: stoppingToken);
+        _logger.LogInformation($"RabbitMQ exchange declared for  producer: {producerId}");
 
         var serializedMessage = JsonSerializer.Serialize(message);
         var messageBytes = Encoding.UTF8.GetBytes(serializedMessage);

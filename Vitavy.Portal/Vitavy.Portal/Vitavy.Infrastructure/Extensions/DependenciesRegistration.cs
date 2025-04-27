@@ -10,8 +10,9 @@ public static class DependenciesRegistration
 {
     public static IServiceCollection AddEventHubInfrastructureServices(this IServiceCollection services, IConfiguration configuration)
     {
-        services.AddTransient<IEventBusConsumer, EventBusConsumer>();
-        services.AddTransient(typeof(IEventBusProducer<>), typeof(EventBusProducer<>));
+        services.AddSingleton<IEventBusConsumer, EventBusConsumer>();
+        services.AddSingleton(typeof(IEventBusRpcProducer<,>), typeof(EventBusRpcProducer<,>));
+        services.AddSingleton(typeof(IEventBusProducer<>), typeof(EventBusProducer<>));
         services.Configure<RabbitMqSetting>( rabbitMqCredential =>
         {
             configuration.GetSection("RabbitMq").Bind(rabbitMqCredential);

@@ -1,0 +1,11 @@
+services:
+  rabbitmq:
+    image: rabbitmq:management
+    ports:
+      - "15672:15672" # Port pour accéder à l'interface de gestion
+      - "5672:5672"   # Port par défaut pour RabbitMQ
+    healthcheck:
+      test: [ "CMD", "rabbitmq-diagnostics", "ping" ]
+      interval: 20s
+      timeout: 10s
+      retries: 4

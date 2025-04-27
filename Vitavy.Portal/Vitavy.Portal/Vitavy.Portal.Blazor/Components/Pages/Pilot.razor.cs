@@ -49,6 +49,7 @@ public partial class Pilot(ISnackbar snackbar, IMediator mediator, IMapper mappe
             var pilotActionTask = mediator.Send(command, token);
             snackbar.Add("Submitted!");
             var result = await pilotActionTask;
+            snackbar.Add($"Result: {result}°C");
         }
     }
 

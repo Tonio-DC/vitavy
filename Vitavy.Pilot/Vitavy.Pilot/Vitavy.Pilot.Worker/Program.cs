@@ -1,5 +1,6 @@
 using Vitavy.Infrastructure.Extensions;
 using Vitavy.Pilot.Application.Extensions;
+using Vitavy.Pilot.Worker.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +11,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddWorkerServices();
 builder.Services.AddApplicationServices();
 builder.Services.AddEventHubInfrastructureServices(builder.Configuration);
 

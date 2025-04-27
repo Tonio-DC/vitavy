@@ -43,7 +43,7 @@ public class EventBusProducer<T> : IEventBusProducer<T> where T : class
         await using var channel = await connection.CreateChannelAsync(cancellationToken: stoppingToken);
         _logger.LogInformation($"RabbitMQ channel created for  producer: {producerId}");
         
-        await channel.ExchangeDeclareAsync(exchange: producerCredential.ExchangeName, type: producerCredential.Type.ToString(), cancellationToken: stoppingToken);
+        await channel.ExchangeDeclareAsync(exchange: producerCredential.ExchangeName, type: producerCredential.Type.ToString().ToLowerInvariant(), cancellationToken: stoppingToken);
         _logger.LogInformation($"RabbitMQ exchange declared for  producer: {producerId}");
         
         var serializedMessage = JsonSerializer.Serialize(message);

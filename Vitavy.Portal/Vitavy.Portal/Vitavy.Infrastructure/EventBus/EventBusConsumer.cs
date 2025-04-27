@@ -33,10 +33,10 @@ public class EventBusConsumer(IOptions<RabbitMqSetting> rabbitMqSetting, ILogger
         await using var connection = await factory.CreateConnectionAsync(stoppingToken);
         await using var channel = await connection.CreateChannelAsync(cancellationToken: stoppingToken);
 
-        await channel.ExchangeDeclareAsync(exchange: consumerCredential.ExchangeName, type: consumerCredential.Type.ToString(), cancellationToken: stoppingToken);
+        await channel.ExchangeDeclareAsync(exchange: consumerCredential.ExchangeName, type: consumerCredential.Type.ToString().ToLowerInvariant(), cancellationToken: stoppingToken);
 
         // declare a server-named queue
-        var queueDeclareResult = await channel.QueueDeclareAsync(queue: consumerCredential.QueueName, cancellationToken: stoppingToken);
+        var queueDeclareResult = await channel.QueueDeclareAsync(queue: consumerCredential.QueueName, durable: true, cancellationToken: stoppingToken);
         //si le queueName est empty, il est auto-généré
         var queueName = queueDeclareResult.QueueName;
 
