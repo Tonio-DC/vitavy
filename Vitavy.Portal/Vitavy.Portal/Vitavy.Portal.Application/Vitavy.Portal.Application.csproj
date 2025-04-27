@@ -8,12 +8,16 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="Handlers\Queries\" />
-      <Folder Include="Requests\Queries\" />
+      <PackageReference Include="FluentResults" Version="3.16.0" />
+      <PackageReference Include="MediatR" Version="12.5.0" />
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="MediatR" Version="12.5.0" />
+      <Folder Include="ApplicationServices\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Vitavy.Infrastructure\Vitavy.Infrastructure.csproj" />
     </ItemGroup>
 
 </Project>

@@ -1,5 +1,5 @@
 using AutoMapper;
-using Vitavy.Portal.Application.Requests.Commands;
+using Vitavy.Portal.Application.Features.Pilot;
 using Vitavy.Portal.Blazor.Models;
 
 namespace Vitavy.Portal.Blazor.Mapping;
