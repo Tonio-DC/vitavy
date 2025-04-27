@@ -1,6 +1,6 @@
 namespace Vitavy.Infrastructure.Contracts;
 
-public interface IEventBusProducer<in T> where T : class
+public interface IEventBusProducer<in TMessage> where TMessage : class
 {
-    Task Publish(T message, string routingKey, string producerId, CancellationToken stoppingToken);
+    Task Publish(TMessage message, string routingKey, string producerId, CancellationToken stoppingToken);
 }
