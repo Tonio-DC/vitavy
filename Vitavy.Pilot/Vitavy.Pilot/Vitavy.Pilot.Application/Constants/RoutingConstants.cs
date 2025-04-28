@@ -1,4 +1,4 @@
-namespace Vitavy.Pilot.Worker.Constants;
+namespace Vitavy.Pilot.Application.Constants;
 
 public class RoutingConstants
 {

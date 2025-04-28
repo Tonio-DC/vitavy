@@ -13,10 +13,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="ApplicationServices\" />
-    </ItemGroup>
-
-    <ItemGroup>
       <ProjectReference Include="..\Vitavy.Infrastructure.Abtraction\Vitavy.Infrastructure.Abtraction.csproj" />
     </ItemGroup>
 
