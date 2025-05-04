@@ -12,8 +12,10 @@ public partial class RoleManagement(IMediator mediator, ISnackbar snackbar) : Co
 {
     private List<Role>  _userRoles = new();
     private string _newRoleName;
-    private User selectedUser;
-    private Role selectedUserRole;
+    private User? selectedUser;
+    private Role? selectedUserRole;
+    private bool userLoaded;
+    public bool RoleSelectionDisabled => !userLoaded;
 
     private async Task<IEnumerable<User>> UserSearch(string value, CancellationToken token)
     {
@@ -32,14 +34,17 @@ public partial class RoleManagement(IMediator mediator, ISnackbar snackbar) : Co
     // - manage-clients
     // - manage-users
 
-    private async Task LoadUser(User user)
+    private async Task LoadUser(User? user)
     {
+        if (user == null)
+            return;
         var userRolesQuery = new UserRolesQuery(user);
         _userRoles = await mediator.Send(userRolesQuery, CancellationToken.None);
+        userLoaded = true;
         snackbar.Add($"Les rôles de l'utilisateur {user.Firstname} {user.Lastname} ont été chargés.", Severity.Info);
     }
 
-    private string? UserToStringFunction(User? user)
+    private string UserToStringFunction(User? user)
     {
         if (user is null)
             return string.Empty;
@@ -63,7 +68,7 @@ public partial class RoleManagement(IMediator mediator, ISnackbar snackbar) : Co
     
     private class RoleNameComparer : IEqualityComparer<Role>
     {
-        public bool Equals(Role x, Role y) => x?.Name == y?.Name;
+        public bool Equals(Role? x, Role? y) => x?.Name == y?.Name;
         public int GetHashCode(Role obj) => obj.Name?.GetHashCode() ?? 0;
     }
 

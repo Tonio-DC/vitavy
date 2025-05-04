@@ -45,6 +45,7 @@
                              SearchFunc="UserRolesSearch"
                              ToStringFunc="UserRolesToStringFunction"
                              CoerceText="true"
+                             Disabled="RoleSelectionDisabled"
                              Variant="Variant.Text"
                              Label="Sélectionnez un rôle"
                              Margin="Margin.None"
@@ -53,7 +54,7 @@
                              Modal="true"/>
         </MudItem>
         <MudItem xs="1">
-            <MudIconButton Color="Color.Primary" Icon="@Icons.Material.Filled.Add" OnClick="@(() => AddRoleToUser(selectedUser, selectedUserRole))"/>
+            <MudIconButton Color="Color.Primary" Icon="@Icons.Material.Filled.Add" Disabled="RoleSelectionDisabled" OnClick="@(() => AddRoleToUser(selectedUser, selectedUserRole))"/>
         </MudItem>
     </MudGrid>
 </MudPaper>
