@@ -18,8 +18,8 @@ public partial class RoleManagement(IMediator mediator, ISnackbar snackbar) : Co
     private async Task<IEnumerable<User>> UserSearch(string value, CancellationToken token)
     {
         // if text is null or empty, don't return values (drop-down will not open)
-        if (string.IsNullOrEmpty(value))
-            return [];
+        // if (string.IsNullOrEmpty(value))
+        //     return [];
         var searchUsersQuery = new SearchUsersQuery(value, 30);
         var users = await mediator.Send(searchUsersQuery, token);
         return users;
