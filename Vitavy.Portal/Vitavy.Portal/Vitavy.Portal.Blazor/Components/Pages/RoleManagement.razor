@@ -1,0 +1,59 @@
+@page "/roles/management"
+@using Vitavy.Portal.Application.Models
+@using Vitavy.Portal.Blazor.Models
+<h3>RoleManagement</h3>
+
+<MudPaper Class="pa-3">
+    <MudGrid>
+        <MudItem xs="2">
+            <MudAutocomplete T="User"
+                             @bind-Value="selectedUser"
+                             SearchFunc="UserSearch"
+                             ToStringFunc="UserToStringFunction"
+                             CoerceText="true"
+                             Variant="Variant.Text"
+                             Label="Sélectionnez un utilisateur"
+                             Margin="Margin.None"
+                             HelperText="saisissez son nom/prénom/username/email ici"
+                             Clearable="true"
+                             Modal="true"/>   
+        </MudItem>
+        <MudItem xs="1">
+            <MudIconButton Class="d-inline" Color="Color.Primary" Icon="@Icons.Material.Filled.TaskAlt" OnClick="@(() => LoadUser(selectedUser))"/>
+        </MudItem>
+    </MudGrid>
+    <MudDataGrid Items="_userRoles">
+        <Columns>
+            <PropertyColumn Property="x => x.Id" Title="Id du rôle" />
+            <PropertyColumn Property="x => x.Name" Title="Nom du rôle" /><HierarchyColumn T="KeycloakRole" Field="Name" Title="Nom du rôle"/>
+            <TemplateColumn CellClass="d-flex justify-end">
+                <CellTemplate>
+                    <MudStack Row>
+                        <MudIconButton Icon="@Icons.Material.Filled.Delete"
+                                       Color="Color.Primary"
+                                       aria-label="Retirer ce rôle à cet utilisateur"
+                                       OnClick="@(() => RemoveUserRole(selectedUser, context.Item))"/>
+                    </MudStack>
+                </CellTemplate>
+            </TemplateColumn>
+        </Columns>
+    </MudDataGrid>
+    <MudGrid>
+        <MudItem xs="2">
+            <MudAutocomplete T="Role"
+                             @bind-Value="selectedUserRole"
+                             SearchFunc="UserRolesSearch"
+                             ToStringFunc="UserRolesToStringFunction"
+                             CoerceText="true"
+                             Variant="Variant.Text"
+                             Label="Sélectionnez un rôle"
+                             Margin="Margin.None"
+                             HelperText="saisissez un rôle"
+                             Clearable="true"
+                             Modal="true"/>
+        </MudItem>
+        <MudItem xs="1">
+            <MudIconButton Color="Color.Primary" Icon="@Icons.Material.Filled.Add" OnClick="@(() => AddRoleToUser(selectedUser, selectedUserRole))"/>
+        </MudItem>
+    </MudGrid>
+</MudPaper>

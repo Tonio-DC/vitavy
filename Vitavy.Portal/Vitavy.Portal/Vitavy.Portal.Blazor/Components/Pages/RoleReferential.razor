@@ -1,0 +1,30 @@
+@page "/roles/referential"
+<h3>RoleReferential</h3>
+
+<MudPaper Class="pa-3">
+    <MudDataGrid Items="@ExistingRoles" Filterable="false" SortMode="@SortMode.None" Groupable="false">
+        <Columns>
+            <PropertyColumn Property="x => x.Id" />
+            <PropertyColumn Property="x => x.Name" />
+            <PropertyColumn Property="x => x.Description" />
+            <TemplateColumn CellClass="d-flex justify-end">
+                <CellTemplate>
+                    <MudStack Row>
+                        <MudIconButton Icon="@Icons.Material.Filled.DeleteForever"
+                                       Color="Color.Primary"
+                                       aria-label="Supprimer définitivement le rôle du référentiel de Vitavy"
+                                       OnClick="@(() => DeleteRole(context.Item))"/>
+                    </MudStack>
+                </CellTemplate>
+            </TemplateColumn>
+        </Columns>
+    </MudDataGrid>
+    <MudGrid>
+        <MudItem xs="2">
+            <MudTextField Class="d-inline" @bind-Value="_roleToAdd" Label="Nom du nouveau rôle" Variant="Variant.Text" HelperText="Créer un rôle"/>    
+        </MudItem>
+        <MudItem xs="1">
+            <MudIconButton Class="d-inline" Color="Color.Primary" Icon="@Icons.Material.Filled.Add" OnClick="@(() => CreateRole(_roleToAdd))"/>
+        </MudItem>
+    </MudGrid>
+</MudPaper>
