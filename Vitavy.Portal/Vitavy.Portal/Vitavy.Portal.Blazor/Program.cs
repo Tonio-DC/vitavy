@@ -5,6 +5,7 @@ using Vitavy.Portal.Application.Extensions;
 using Vitavy.Portal.Application.Features.Pilot;
 using Vitavy.Portal.Blazor.Components;
 using Vitavy.Portal.Blazor.Mapping;
+using Vitavy.Portal.Infrastructure.Keycloak.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,6 +20,7 @@ builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(Assembly.G
 builder.Services.AddAutoMapper(typeof(MappingProfile));
 builder.Services.AddApplicationServices();
 builder.Services.AddEventHubInfrastructureServices(builder.Configuration);
+builder.Services.AddKeycloakInfrastructureDependencies(builder.Configuration);
 
 var app = builder.Build();
 

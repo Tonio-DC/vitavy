@@ -14,6 +14,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vitavy.Infrastructure", "Vi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vitavy.Infrastructure.Abtraction", "Vitavy.Infrastructure.Abtraction\Vitavy.Infrastructure.Abtraction.csproj", "{AE57F6FF-3A46-4C2B-BA33-291FBEFECBBD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vitavy.Portal.Infrastructure.Keycloak", "Vitavy.Portal.Infrastructure.Keycloak\Vitavy.Portal.Infrastructure.Keycloak.csproj", "{3B797A9E-6367-4329-9784-79EA6A3AE8CF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,5 +38,9 @@ Global
 		{AE57F6FF-3A46-4C2B-BA33-291FBEFECBBD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AE57F6FF-3A46-4C2B-BA33-291FBEFECBBD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AE57F6FF-3A46-4C2B-BA33-291FBEFECBBD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3B797A9E-6367-4329-9784-79EA6A3AE8CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3B797A9E-6367-4329-9784-79EA6A3AE8CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3B797A9E-6367-4329-9784-79EA6A3AE8CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3B797A9E-6367-4329-9784-79EA6A3AE8CF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
